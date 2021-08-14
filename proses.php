@@ -55,5 +55,24 @@ class Presensi
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    public function GetByIdDivisi($id_divisi)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM tbl_divisi WHERE id_divisi = '" . $id_divisi . "' LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+
+    public function UpdateDivisi($id_divisi, $nama_divisi)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = " UPDATE tbl_divisi SET nama_divisi ='" . $nama_divisi . "' WHERE id_divisi = '".$id_divisi."'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }
 ?>
