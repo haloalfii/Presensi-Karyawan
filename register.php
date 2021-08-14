@@ -120,14 +120,14 @@ if (isset($_POST['btn-signup'])) {
     <title>Daftar</title>
 </head>
 
-<body class="bg-gradient-info">
+<body class="bg-gradient-dark">
     <div class="container">
         <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block">
-                        <img src="img/nbs-icon.PNG" style="margin-top: 200px; margin-left: 100px; height: 300px; width: 300px">
+                        <img src="img/nbs-icon.PNG" style="margin-top: 270px; margin-left: 100px; height: 300px; width: 300px">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5">
@@ -182,13 +182,13 @@ if (isset($_POST['btn-signup'])) {
                                     <label>Select Image <strong class="text-danger">*</strong></label>
                                     <input type="file" name="foto" accept="image/gif,image/jpeg,image/jpg,image/png,">
                                 </div>
-                                <button type="submit" id="btn-signup" name="btn-signup" class="btn btn-info btn-user btn-block">
+                                <button type="submit" id="btn-signup" name="btn-signup" class="btn btn-dark btn-user btn-block">
                                     Register Account
                                 </button>
                                 <hr>
                             </form>
                             <div class="text-center">
-                                <a class="small" href="login.php">Sudah memiliki Akun? Login!</a>
+                                <a class="small text-dark" href="login.php">Sudah memiliki Akun? Login!</a>
                             </div>
                         </div>
                     </div>

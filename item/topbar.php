@@ -31,22 +31,22 @@
 
         <div class="topbar-divider d-none d-sm-block"></div>
         <?php
-        // include_once "item/db_connect.php";
-        // $id = $_SESSION['nik'];
-        // $database = new database;
+        include_once "proses.php";
+        $id = $_SESSION['nik'];
+        $database = new Presensi;
         
-        // $data = $database->GetByIdNik($id);
+        $data = $database->GetByNik($id);
         ?>
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small text-center"> <?php echo $_SESSION['nama'] ?> <br><strong class="text-success"><?php echo $_SESSION['role']; ?></strong> </span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small text-center"> <?php echo $data['nama'] ?> <br><strong class="text-success"><?php echo $_SESSION['role']; ?></strong> </span>
                 <?php if(empty($_SESSION['foto'])){
                     echo '<img class="img-profile rounded-circle" src="img/undraw_profile.svg">';
                 }
                 else
                 {
-                    echo '<img class="img-profile rounded-circle" src="file/'.$_SESSION['foto'] .'">';
+                    echo '<img class="img-profile rounded-circle" src="file/'.$data['foto'] .'">';
                 }
                 ?>
                 

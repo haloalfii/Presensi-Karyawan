@@ -12,7 +12,7 @@ if (!isset($_SESSION['is_login'])) {
     <?php include_once "item/head.php"?>
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="startTime()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">

@@ -39,7 +39,7 @@ if (isset($_POST['btnlogin'])) {
     <title>Login</title>
 </head>
 
-<body class="bg-gradient-info">
+<body class="bg-gradient-dark">
 
     <div class="container">
 
@@ -68,7 +68,7 @@ if (isset($_POST['btnlogin'])) {
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password" required>
                                         </div>
-                                        <button name="btnlogin" class="btn btn-info btn-user btn-block">
+                                        <button name="btnlogin" class="btn btn-dark btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>

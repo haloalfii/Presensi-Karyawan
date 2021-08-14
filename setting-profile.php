@@ -6,11 +6,10 @@ if (!isset($_SESSION['is_login'])) {
 ?>
 
 <?php
-//tampilkan data sesuai id yang dilempar
+//tampilkan data sesuai NIK
 include_once 'proses.php';
 $proses = new Presensi;
-$id = $_SESSION['id'];
-
+$id = $_SESSION['nik'];
 
 $data = $proses->GetByNik($id);
 ?>
@@ -43,9 +42,9 @@ $data = $proses->GetByNik($id);
                     if (isset($_POST['submit'])) {
 
                         // Ambil data foto yang dipilih dari form
-                        $sumber = $_FILES['image']['name'];
+                        $sumber = $_FILES['foto']['name'];
 
-                        $nama_gambar = $_FILES['image']['tmp_name'];
+                        $nama_gambar = $_FILES['foto']['tmp_name'];
                         // Rename nama fotonya dengan menambahkan tanggal dan jam upload
                         $fotobaru = date('dmYHis') . $sumber;
 
@@ -58,12 +57,12 @@ $data = $proses->GetByNik($id);
                         if (move_uploaded_file($nama_gambar, $path)) { // Cek apakah gambar berhasil diupload atau tidak
                             // Cek apakah file gambar sebelumnya ada di folder foto
 
-                            if (is_file("file/" . $data['image'])) { // Jika gambar ada
+                            if (is_file("file/" . $data['foto'])) { // Jika gambar ada
 
-                                unlink("file/" . $data['image']); // Hapus file gambar sebelumnya yang ada di folder images
+                                unlink("file/" . $data['foto']); // Hapus file gambar sebelumnya yang ada di folder images
                             }
 
-                            $update = $proses->UpdateProfilImage($_POST['npm'], $_POST['username'], $_POST['email'], $_POST['no_telepon'], $_POST['password'], $fotobaru, $id);
+                            $update = $proses->UpdateProfilImage($_POST['id_divisi'], $_POST['nama'], $_POST['no_hp'], $_POST['email'], $_POST['password'], $fotobaru, $id);
                             if ($update) {
                                 echo '<div class="container mb-n4 text-center">
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -73,10 +72,10 @@ $data = $proses->GetByNik($id);
                                         </button>
                                         </div>
                                     </div>';
-                                echo '<meta http-equiv="refresh" content="1;url=settingProfile.php">';
+                                echo '<meta http-equiv="refresh" content="1;url=setting-profile.php">';
                             }
                         }
-                        $update = $proses->UpdateProfil($_POST['npm'], $_POST['username'], $_POST['email'], $_POST['no_telepon'], $_POST['password'], $id);
+                        $update = $proses->UpdateProfil($_POST['id_divisi'], $_POST['nama'], $_POST['no_hp'], $_POST['email'], $_POST['password'], $id);
                         if ($update) {
                             echo '<div class="container mb-n4 text-center">
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -86,9 +85,8 @@ $data = $proses->GetByNik($id);
                                         </button>
                                         </div>
                                     </div>';
-                            echo '<meta http-equiv="refresh" content="1;url=settingProfile.php">';
+                            echo '<meta http-equiv="refresh" content="1;url=index.php">';
                         }
-
                     }
                     ?>
                     <!-- Title -->
@@ -109,19 +107,29 @@ $data = $proses->GetByNik($id);
                                 <div class="row">
                                     <div class="col-sm">
                                         <form class="needs-validation" method="post" novalidate="" enctype="multipart/form-data">
-                                            <img class="img-profile rounded-circle" style="width: 150px; height: 150px" src="file/<?php echo $data['image']; ?>">
+                                            <img class="img-profile rounded-circle" style="width: 150px; height: 150px" src="file/<?php echo $data['foto']; ?>">
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-10">
-                                                    <label for="nim">NPM</label>
-                                                    <input type="text" class="form-control" id="npm" value="<?php echo $data['npm']; ?>" name="npm" required="">
-                                                    <div class="invalid-feedback">Please provide a valid NPM.</div>
+                                                    <label for="nim">Nama</label>
+                                                    <input type="text" class="form-control" id="nama" value="<?php echo $data['nama']; ?>" name="nama" required="">
+                                                    <div class="invalid-feedback">Please provide a valid name.</div>
                                                 </div>
                                             </div>
 
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-10">
-                                                    <label for="validationCustom03">Nama Mahasiswa</label>
-                                                    <input type="text" class="form-control" id="username" value="<?php echo $data['username']; ?>" name="username" required="">
+                                                    <label for="validationCustom03">Divisi</label>
+                                                    <select name="id_divisi" id="id_divisi" class="form-control">
+                                                        <?php
+                                                        include_once "item/db_connect.php";
+                                                        $row = mysqli_query($con, "SELECT * FROM tbl_divisi");
+                                                        foreach ($row as $divisi) {
+                                                        ?>
+                                                            <option value="<?php echo $divisi['id_divisi'] ?>"><?php echo $divisi['nama_divisi'] ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
                                                     <div class="invalid-feedback">Please provide a valid Nama Mahasiswa.</div>
                                                 </div>
                                             </div>
@@ -137,7 +145,7 @@ $data = $proses->GetByNik($id);
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-10">
                                                     <label for="validationCustom03">No Hp</label>
-                                                    <input type="text" class="form-control" id="no_telepon" value="<?php echo $data['no_telepon']; ?>" name="no_telepon" required="">
+                                                    <input type="text" class="form-control" id="no_hp" value="<?php echo $data['no_hp']; ?>" name="no_hp" required="">
                                                     <div class="invalid-feedback">Please provide a valid No Hp.</div>
                                                 </div>
                                             </div>
@@ -152,7 +160,7 @@ $data = $proses->GetByNik($id);
                                             <div class="form-row pt-4">
                                                 <div class="field image">
                                                     <label>Select Image</label>
-                                                    <input type="file" name="image" accept="image/gif,image/jpeg,image/jpg,image/png,">
+                                                    <input type="file" name="foto" accept="image/gif,image/jpeg,image/jpg,image/png,">
                                                 </div>
                                             </div>
                                             <br>
