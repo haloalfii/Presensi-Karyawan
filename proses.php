@@ -153,4 +153,22 @@ class Presensi
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function GetPresensi($nik){
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM tbl_presensi INNER JOIN tbl_user ON tbl_user.nik = tbl_presensi.nik WHERE tbl_presensi.nik = '".$nik."'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    public function GetPresensiAll(){
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM tbl_presensi INNER JOIN tbl_user ON tbl_user.nik = tbl_presensi.nik";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 }

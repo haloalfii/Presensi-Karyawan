@@ -35,8 +35,83 @@ if (!isset($_SESSION['is_login'])) {
                             <br>
                         </div>
                         <div class="card-body">
-                            
-                            
+                            <form class="needs-validation" method="post" novalidate="" enctype="multipart/form-data">
+                                <div class="form-row">
+                                    <div class="col-md-2 mb-10">
+                                        <label for="validationCustom03">Nama Karyawan</label>
+                                        <select name="nik" id="nik" class="form-control">
+                                            <?php
+                                            include_once "item/db_connect.php";
+                                            $row = mysqli_query($con, "SELECT * FROM tbl_user");
+                                            foreach ($row as $nik) {
+                                            ?>
+                                                <option value="<?php echo $nik['nik'] ?>"><?php echo $nik['nama'] ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-primary mt-4" type="cari" name="cari">Submit</button>
+                                </div>
+                            </form>
+                            <br/>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%">No</th>
+                                            <th width="20%">Nama</th>
+                                            <th width="10%">Divisi</th>
+                                            <th width="20%">Detail Masuk</th>
+                                            <th width="20%">Detail Keluar</th>
+                                            <th width="20%">Laporan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $number = 1;
+
+                                        include_once "proses.php";
+                                        $proses = new Presensi;
+                                        if (isset($_POST['cari'])) {
+                                            if($_POST['nik']){
+                                                $choosenik = $_POST['nik'];
+                                                $laporan = $proses->GetPresensi($choosenik);
+                                            }                                        
+                                        }
+                                        else {
+                                            $laporan = $proses->GetPresensiAll();
+                                        }
+
+                                        foreach ($laporan as $laporan) {
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $number++ ?></td>
+                                                <td><?php echo $laporan['nama'] ?></td>
+                                                <td>
+                                                    <?php 
+                                                        include_once "item/db_connect.php"; 
+                                                        $division = mysqli_query($con, "SELECT nama_divisi FROM tbl_divisi WHERE id_divisi = '".$laporan['id_divisi']."'");
+                                                        $output = mysqli_fetch_row($division);
+                                                        echo $output[0];
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $laporan['tanggal_presensi_masuk']?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $laporan['tanggal_presensi_keluar']?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $laporan['laporan']?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
