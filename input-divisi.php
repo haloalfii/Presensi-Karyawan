@@ -6,17 +6,18 @@ if (!isset($_SESSION['is_login'])) {
 ?>
 
 <?php
-$get_id_divisi = $_GET['get_id_divisi'];
-include_once "item/db_connect.php";
-include_once "proses.php";
-$sql = mysqli_query($con, "SELECT nama_divisi FROM tbl_divisi WHERE id_divisi = '" . $get_id_divisi . "'");
-$x = mysqli_fetch_row($sql);
+include('proses.php');
+$proses = new Presensi();
 
-$proses = new Presensi;
 if (isset($_POST['submit'])) {
-    $update = $proses->UpdateDivisi($get_id_divisi, $_POST['nama_divisi']);
-    if ($update) {
-        echo "<script>alert('Data Divisi berhasil diupdate');window.location = 'data-divisi.php';</script>";
+    $nama_divisi = $_POST['nama_divisi'];
+
+    $add_status = $proses->InputDivisi($nama_divisi);
+    if ($add_status) {
+        echo "<script>
+            alert('Data berhasil ditambahkan');
+            location='data-divisi.php';
+        </script>";
     }
 }
 ?>
@@ -25,21 +26,23 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <?php include_once "item/head.php" ?>
+    <?php include_once "item/head.php"?>
 </head>
 
 <body id="page-top" onload="startTime()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <?php include_once "item/sidebar.php" ?>
+        <?php include_once "item/sidebar.php"?>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
 
-                <?php include_once "item/topbar.php" ?>
+                <?php include_once "item/topbar.php"?>
+
+                <div class="container-fluid">
                 <br><br>
                 <div class="container-fluid">
                     <!-- Page Heading -->
@@ -58,7 +61,7 @@ if (isset($_POST['submit'])) {
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-10">
                                                     <label for="nama_divisi">Nama Divisi</label>
-                                                    <input type="text" class="form-control" id="nama_divisi" value="<?php echo $x[0] ?>" name="nama_divisi" required="">
+                                                    <input type="text" class="form-control" id="nama_divisi" name="nama_divisi" required="">
                                                     <div class="invalid-feedback">Please provide a valid Division Name.</div>
                                                 </div>
                                             </div>
@@ -72,10 +75,12 @@ if (isset($_POST['submit'])) {
                     </div>
 
                 </div>
+                </div>
+
             </div>
             <!-- End of Main Content -->
 
-            <?php include_once "item/footer.php" ?>
+            <?php include_once "item/footer.php"?>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -87,8 +92,7 @@ if (isset($_POST['submit'])) {
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-    <?php include_once "item/logout-modal.php" ?>
-    <?php include_once "item/script.php" ?>
+    <?php include_once "item/logout-modal.php"?>
+    <?php include_once "item/script.php"?>
 </body>
-
 </html>

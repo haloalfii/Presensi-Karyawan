@@ -37,7 +37,7 @@ if (!isset($_SESSION['is_login'])) {
                             <a class="btn btn-success" href="export-mhs.php">
                                 <i class="fa fa-download fa-fw"></i> Export Data
                             </a>
-                            <a class="btn btn-success" href="input-data-mhs.php">
+                            <a class="btn btn-success" href="input-divisi.php">
                                 <i class="fa fa-plus fa-fw"></i> Input Data
                             </a>
                         </div>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['is_login'])) {
                                                 </td>
                                                 <td>
                                                     <a href="edit-divisi.php?get_id_divisi=<?=$row['id_divisi']?>" class="btn btn-warning btn-xs" data-toggle="tooltip" data-original-title="Edit">Edit</a>
-                                                    <a href="hapus-mahasiswa.php?id_divisi=<?= $row['id_divisi'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $row['nama_divisi'] ?>?');" data-toggle="tooltip" data-original-title="Hapus" class="btn btn-danger btn-xs">Delete</i></a>
+                                                    <a href="hapus-divisi.php?get_id_divisi=<?= $row['id_divisi'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus Divisi <?php echo $row['nama_divisi'] ?>?');" data-toggle="tooltip" data-original-title="Hapus" class="btn btn-danger btn-xs">Delete</i></a>
                                                 </td>
                                             </tr>
                                         <?php

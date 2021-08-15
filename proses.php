@@ -74,5 +74,24 @@ class Presensi
         $stmt->execute();
         return $stmt->rowCount();
     }
+
+    public function InputDivisi($nama_divisi)
+    {
+        $sql = $this->pdo->prepare("INSERT INTO tbl_divisi (nama_divisi)
+        VALUES (?) 
+        ON DUPLICATE KEY UPDATE nama_divisi = VALUES(nama_divisi)");
+
+        $sql->bindParam(1, $nama_divisi);
+        $sql->execute();
+        return $sql->rowCount();
+    }
+
+    public function DeleteDivisi($id_divisi)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "DELETE FROM tbl_divisi WHERE id_divisi ='" . $id_divisi . "'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }
-?>
