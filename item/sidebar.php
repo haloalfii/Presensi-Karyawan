@@ -40,7 +40,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu :</h6>
                         <a class="collapse-item" href="data-divisi.php">Divisi</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="data-karyawan.php">Daftar Karyawan</a>
                     </div>
                 </div>
             </li>

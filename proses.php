@@ -46,6 +46,9 @@ class Presensi
         return $stmt->rowCount();
     }
 
+
+    // CRUD Divisi
+
     public function GetDivisi()
     {
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -93,5 +96,18 @@ class Presensi
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->rowCount();
+    }
+
+
+
+    // CRUD Karyawan
+
+    public function GetAllKaryawan(){
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM tbl_user INNER JOIN tbl_divisi ON tbl_divisi.id_divisi = tbl_user.id_divisi WHERE role = 'karyawan'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
     }
 }

@@ -107,7 +107,12 @@ $data = $proses->GetByNik($id);
                                 <div class="row">
                                     <div class="col-sm">
                                         <form class="needs-validation" method="post" novalidate="" enctype="multipart/form-data">
-                                            <img class="img-profile rounded-circle" style="width: 150px; height: 150px" src="file/<?php echo $data['foto']; ?>">
+                                            <?php if (empty($_SESSION['foto'])) {
+                                                echo '<img class="img-profile rounded-circle" style="width: 150px; height: 150px" src="img/undraw_profile.svg">';
+                                            } else {
+                                                echo '<img class="img-profile rounded-circle" style="width: 150px; height: 150px" src="file/' . $data['foto'] . '">';
+                                            }
+                                            ?>
                                             <div class="form-row">
                                                 <div class="col-md-6 mb-10">
                                                     <label for="nim">Nama</label>
