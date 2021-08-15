@@ -110,4 +110,47 @@ class Presensi
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    public function GetByNikKaryawan($nik)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = "SELECT * FROM tbl_user WHERE nik = '" . $nik . "'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+
+    //Presensi
+    public function InputMasuk($id_presensi, $nik, $tanggal_presensi_masuk)
+    {
+        $sql = $this->pdo->prepare("INSERT INTO tbl_presensi (id_presensi, nik, tanggal_presensi_masuk)
+        VALUES (?, ?, ?) 
+        ON DUPLICATE KEY UPDATE id_presensi = VALUES(id_presensi), nik = VALUES(nik), tanggal_presensi_masuk = VALUES(tanggal_presensi_masuk)");
+
+        $sql->bindParam(1, $id_presensi);
+        $sql->bindParam(2, $nik);
+        $sql->bindParam(3, $tanggal_presensi_masuk);
+        $sql->execute();
+        return $sql->rowCount();
+    }
+
+    public function InputKeluar($id_presensi, $tanggal_presensi_keluar)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = " UPDATE tbl_presensi SET tanggal_presensi_keluar ='" . $tanggal_presensi_keluar . "' WHERE id_presensi = '".$id_presensi."'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
+
+    public function InputLaporan($id_presensi, $laporan)
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $query = " UPDATE tbl_presensi SET laporan ='" . $laporan . "' WHERE id_presensi = '".$id_presensi."'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->rowCount();
+    }
 }

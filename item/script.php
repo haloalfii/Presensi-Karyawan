@@ -31,6 +31,8 @@ function startTime() {
   s = checkTime(s);
   document.getElementById('clock').innerHTML =  h + ":" + m + ":" + s;
   setTimeout(startTime, 1000);
+  document.getElementById('clock2').innerHTML =  h + ":" + m + ":" + s;
+  setTimeout(startTime, 1000);
 }
 
 function checkTime(i) {

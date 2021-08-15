@@ -49,7 +49,6 @@ if (!isset($_SESSION['is_login'])) {
                                             <th width="5%">No</th>
                                             <th>Karyawan</th>                   
                                             <th>Kontak</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,10 +89,6 @@ if (!isset($_SESSION['is_login'])) {
                                                             Telp : <?php echo $row['no_hp'] ?>
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <a href="edit-divisi.php?get_id_divisi=<?= $row['id_divisi'] ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" data-original-title="Edit">Edit</a>
-                                                    <a href="hapus-divisi.php?get_id_divisi=<?= $row['id_divisi'] ?>" onclick="return confirm('Apakah anda yakin akan menghapus Divisi <?php echo $row['nama_divisi'] ?>?');" data-toggle="tooltip" data-original-title="Hapus" class="btn btn-danger btn-xs">Delete</i></a>
                                                 </td>
                                             </tr>
                                         <?php
