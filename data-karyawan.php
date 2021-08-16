@@ -34,7 +34,7 @@ if (!isset($_SESSION['is_login'])) {
                             <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-users"></i> Data Karyawan</h6>
                             <br>
 
-                            <a class="btn btn-success" href="export-divisi.php">
+                            <a class="btn btn-success" href="export-karyawan.php">
                                 <i class="fa fa-download fa-fw"></i> Export Data
                             </a>
                             <a class="btn btn-success" href="input-karyawan.php">
