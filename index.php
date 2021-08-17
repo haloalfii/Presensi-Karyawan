@@ -45,6 +45,7 @@ $finance = mysqli_query($con, "SELECT * FROM tbl_user WHERE id_divisi = 2");
 <html lang="en">
 
 <head>
+    <title>Dashboard <?php echo $_SESSION['role'] ?></title>
     <?php include_once "item/head.php" ?>
 </head>
 
@@ -107,59 +108,59 @@ $finance = mysqli_query($con, "SELECT * FROM tbl_user WHERE id_divisi = 2");
                 <?php
                 if ($_SESSION['role'] == 'karyawan') {
                 ?>
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-users"></i> Silakan Presensi</h1>
-                    <hr>
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-users"></i> Presensi Karyawan</h6>
-                            <br>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <th>Jam</th>
-                                    <th>Absen Masuk</th>
-                                    <th>Absen Keluar</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <h3 class="nav-link text-dark">
-                                                <div id="clock2"></div>
-                                            </h3>
-                                        </td>
-                                        <td>
-                                            <form class="needs-validation" method="post" novalidate="">
-                                                <?php $tglid = date("Y-m-d");
-                                                $tgl = date("Y-m-d h:i:s"); ?>
-                                                <input type="hidden" class="form-control" id="id_presensi" name="id_presensi" value="<?php echo $_SESSION['nik'];
-                                                                                                                                        echo $tglid; ?>">
-                                                <input type="hidden" class="form-control" id="nik" name="nik" value="<?php echo $_SESSION['nik'] ?>">
-                                                <input type="hidden" class="form-control" id="tanggal_presensi_masuk" name="tanggal_presensi_masuk" value="<?php echo $tgl ?>">
-                                                <button class="btn btn-info" type="login" name="login">Presensi masuk</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form class="needs-validation" method="post" novalidate="">
-                                                <?php $tglid = date("Y-m-d");
-                                                $tgl_out = date("Y-m-d h:i:s"); ?>
-                                                <input type="hidden" class="form-control" id="id_presensi" name="id_presensi" value="<?php echo $_SESSION['nik'];
-                                                                                                                                        echo $tglid; ?>">
-                                                <input type="hidden" class="form-control" id="tanggal_presensi_keluar" name="tanggal_presensi_keluar" value="<?php echo $tgl_out ?>">
-                                            <button class="btn btn-danger" type="logout" name="logout">Presensi Keluar</button>
-                                            </form>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        <h1 class="h3 mb-2 text-gray-800"><i class="fas fa-users"></i> Silakan Presensi</h1>
+                        <hr>
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-users"></i> Presensi Karyawan</h6>
+                                <br>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <th>Jam</th>
+                                        <th>Absen Masuk</th>
+                                        <th>Absen Keluar</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="nav-link text-dark">
+                                                    <div id="clock2"></div>
+                                                </h3>
+                                            </td>
+                                            <td>
+                                                <form class="needs-validation" method="post" novalidate="">
+                                                    <?php $tglid = date("Y-m-d");
+                                                    $tgl = date("Y-m-d h:i:s"); ?>
+                                                    <input type="hidden" class="form-control" id="id_presensi" name="id_presensi" value="<?php echo $_SESSION['nik'];
+                                                                                                                                            echo $tglid; ?>">
+                                                    <input type="hidden" class="form-control" id="nik" name="nik" value="<?php echo $_SESSION['nik'] ?>">
+                                                    <input type="hidden" class="form-control" id="tanggal_presensi_masuk" name="tanggal_presensi_masuk" value="<?php echo $tgl ?>">
+                                                    <button class="btn btn-info" type="login" name="login">Presensi masuk</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form class="needs-validation" method="post" novalidate="">
+                                                    <?php $tglid = date("Y-m-d");
+                                                    $tgl_out = date("Y-m-d h:i:s"); ?>
+                                                    <input type="hidden" class="form-control" id="id_presensi" name="id_presensi" value="<?php echo $_SESSION['nik'];
+                                                                                                                                            echo $tglid; ?>">
+                                                    <input type="hidden" class="form-control" id="tanggal_presensi_keluar" name="tanggal_presensi_keluar" value="<?php echo $tgl_out ?>">
+                                                    <button class="btn btn-danger" type="logout" name="logout">Presensi Keluar</button>
+                                                </form>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
 
-                            </table>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
-
-                </div>
                 <?php
                 }
                 ?>

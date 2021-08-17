@@ -9,6 +9,7 @@ if (!isset($_SESSION['is_login'])) {
 <html lang="en">
 
 <head>
+    <title>Data Karyawan</title>
     <?php include_once "item/head.php" ?>
 </head>
 
@@ -47,7 +48,7 @@ if (!isset($_SESSION['is_login'])) {
                                     <thead>
                                         <tr>
                                             <th width="5%">No</th>
-                                            <th>Karyawan</th>                   
+                                            <th>Karyawan</th>
                                             <th>Kontak</th>
                                         </tr>
                                     </thead>
@@ -79,7 +80,7 @@ if (!isset($_SESSION['is_login'])) {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                
+
                                                 <td>
                                                     <div class="mt-2 ml-4">
                                                         <div>

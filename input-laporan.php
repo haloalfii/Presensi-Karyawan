@@ -27,6 +27,7 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
+    <title>Input Laporan</title>
     <?php include_once "item/head.php" ?>
 </head>
 

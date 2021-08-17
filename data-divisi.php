@@ -9,6 +9,7 @@ if (!isset($_SESSION['is_login'])) {
 <html lang="en">
 
 <head>
+    <title>Data Divisi</title>
     <?php include_once "item/head.php" ?>
 </head>
 

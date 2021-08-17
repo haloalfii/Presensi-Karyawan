@@ -117,7 +117,7 @@ if (isset($_POST['btn-signup'])) {
     <?php
     include_once "item/head.php";
     ?>
-    <title>Daftar</title>
+    <title>Register</title>
 </head>
 
 <body class="bg-gradient-dark">
@@ -152,13 +152,13 @@ if (isset($_POST['btn-signup'])) {
                                         <select name="id_divisi" id="id_divisi" class="form-control rounded-pill" style="height: 50px;">
                                             <option value="">Pilih Divisi..</option>
                                             <?php
-                                                include_once "item/db_connect.php";
-                                                $row = mysqli_query($con, "SELECT * FROM tbl_divisi");
-                                                foreach ($row as $data) {
+                                            include_once "item/db_connect.php";
+                                            $row = mysqli_query($con, "SELECT * FROM tbl_divisi");
+                                            foreach ($row as $data) {
                                             ?>
-                                            <option value="<?php echo $data['id_divisi']?>"><?php echo $data['nama_divisi']?></option>
+                                                <option value="<?php echo $data['id_divisi'] ?>"><?php echo $data['nama_divisi'] ?></option>
                                             <?php
-                                                }
+                                            }
                                             ?>
                                         </select>
                                         <div class="invalid-feedback">Please provide a valid Nama Mahasiswa.</div>

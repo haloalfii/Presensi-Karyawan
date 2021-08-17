@@ -109,6 +109,7 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
+    <title>Input Karyawan</title>
     <?php include_once "item/head.php" ?>
 </head>
 

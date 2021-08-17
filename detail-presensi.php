@@ -9,6 +9,7 @@ if (!isset($_SESSION['is_login'])) {
 <html lang="en">
 
 <head>
+    <title>Detail Presensi</title>
     <?php include_once "item/head.php" ?>
 </head>
 
@@ -33,7 +34,7 @@ if (!isset($_SESSION['is_login'])) {
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary"><i class="fas fa-users"></i> Presensi Karyawan</h6>
                             <br>
-        
+
                         </div>
                         <div class="card-body">
                             <form class="needs-validation" method="post" novalidate="" enctype="multipart/form-data">
@@ -62,7 +63,7 @@ if (!isset($_SESSION['is_login'])) {
                                 if (isset($_POST["cari"])) {
                                     $getnik = $_POST['nik'];
                                     echo "<input type='hidden' name='nik' value='$getnik'>";
-                                } 
+                                }
                                 ?>
                                 <button type="submit" name="excel" value="excel" class="btn btn-success mt-4"><i class="fa fa-download fa-fw"></i> Export Data</button>
                             </form>
@@ -86,15 +87,13 @@ if (!isset($_SESSION['is_login'])) {
                                         include_once "proses.php";
                                         $proses = new Presensi;
                                         if (isset($_POST['cari'])) {
-                                            if ($_POST['nik'] == "all"){
+                                            if ($_POST['nik'] == "all") {
                                                 $laporan = $proses->GetPresensiAll();
-                                            }
-                                            else if ($_POST['nik']) {
+                                            } else if ($_POST['nik']) {
                                                 $choosenik = $_POST['nik'];
                                                 $laporan = $proses->GetPresensi($choosenik);
                                             }
-                                        } 
-                                        else {
+                                        } else {
                                             $laporan = $proses->GetPresensiAll();
                                         }
 

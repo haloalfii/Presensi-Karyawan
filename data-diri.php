@@ -19,6 +19,7 @@ $data = $proses->GetByNik($id);
 <html lang="en">
 
 <head>
+    <title>Data Diri</title>
     <?php include_once "item/head.php" ?>
 </head>
 

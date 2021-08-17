@@ -22,7 +22,7 @@ $data = $proses->GetByNik($id);
     <?php
     include_once "item/head.php";
     ?>
-    <title>Data Mahasiswa</title>
+    <title>Profile Setting</title>
 </head>
 
 <body id="page-top">
