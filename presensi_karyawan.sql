@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2021 at 07:08 PM
+-- Generation Time: Aug 17, 2021 at 07:03 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -47,22 +47,22 @@ INSERT INTO `tbl_divisi` (`id_divisi`, `nama_divisi`) VALUES
 --
 
 CREATE TABLE `tbl_presensi` (
-  `id_presensi` int(100) NOT NULL,
+  `id_presensi` varchar(100) NOT NULL,
   `nik` int(20) NOT NULL,
-  `tanggal_presensi` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_progres`
---
-
-CREATE TABLE `tbl_progres` (
-  `id_progres` int(255) NOT NULL,
-  `id_presensi` int(100) NOT NULL,
+  `tanggal_presensi_masuk` datetime NOT NULL,
+  `tanggal_presensi_keluar` datetime NOT NULL,
   `laporan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_presensi`
+--
+
+INSERT INTO `tbl_presensi` (`id_presensi`, `nik`, `tanggal_presensi_masuk`, `tanggal_presensi_keluar`, `laporan`) VALUES
+('181121392021-08-14', 18112139, '2021-08-14 20:00:00', '2021-08-14 22:43:34', 'Join'),
+('181121392021-08-15', 18112139, '2021-08-15 20:00:00', '2021-08-15 22:40:23', 'Membuat Login Page'),
+('181122662021-08-15', 18112266, '2021-08-15 07:07:27', '2021-08-15 07:07:29', 'Sudah Makan'),
+('181122662021-08-16', 18112266, '2021-08-16 06:17:31', '2021-08-16 06:18:06', 'Sudah menyelesaikan Projek Chat');
 
 -- --------------------------------------------------------
 
@@ -86,8 +86,8 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`nik`, `id_divisi`, `nama`, `no_hp`, `email`, `password`, `foto`, `role`) VALUES
-(18112139, 1, 'Alfian Luthfi', '08156532654', 'alfiankurniawan85@gmail.com', '123456', 'alfian.jpg', 'admin'),
-(18112266, 1, 'Fery', '081565326542', 'fery@gmail.com', '123456', '', 'karyawan');
+(18112139, 1, 'Alfi', '08156532654', 'alfiankurniawan85@gmail.com', '123456', '15082021202009alfian.jpg', 'admin'),
+(18112266, 1, 'Fery ', '081565326542', 'fery@gmail.com', '123456', '15082021202116Ronal.jpg', 'karyawan');
 
 --
 -- Indexes for dumped tables
@@ -107,13 +107,6 @@ ALTER TABLE `tbl_presensi`
   ADD KEY `fk_presensi` (`nik`);
 
 --
--- Indexes for table `tbl_progres`
---
-ALTER TABLE `tbl_progres`
-  ADD PRIMARY KEY (`id_progres`),
-  ADD KEY `fk_pre` (`id_presensi`);
-
---
 -- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -128,19 +121,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_divisi`
 --
 ALTER TABLE `tbl_divisi`
-  MODIFY `id_divisi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_presensi`
---
-ALTER TABLE `tbl_presensi`
-  MODIFY `id_presensi` int(100) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_progres`
---
-ALTER TABLE `tbl_progres`
-  MODIFY `id_progres` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_divisi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -151,12 +132,6 @@ ALTER TABLE `tbl_progres`
 --
 ALTER TABLE `tbl_presensi`
   ADD CONSTRAINT `fk_presensi` FOREIGN KEY (`nik`) REFERENCES `tbl_user` (`nik`);
-
---
--- Constraints for table `tbl_progres`
---
-ALTER TABLE `tbl_progres`
-  ADD CONSTRAINT `fk_pre` FOREIGN KEY (`id_presensi`) REFERENCES `tbl_presensi` (`id_presensi`);
 
 --
 -- Constraints for table `tbl_user`
